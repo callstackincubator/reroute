@@ -6,6 +6,7 @@
   "reason": {
     "react-jsx": 2
   },
+  "namespace": false,
   "sources": [
     {
       "dir": "src",
