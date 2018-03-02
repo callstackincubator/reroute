@@ -16,10 +16,6 @@ module CreateRouter = (Config: RouterConfig) => {
         route:
           ReasonReact.Router.dangerouslyGetInitialUrl() |> Config.routeFromUrl
       },
-      didMount: _self => {
-        ReasonReact.Router.push("");
-        ReasonReact.NoUpdate;
-      },
       reducer: (action, _state) =>
         switch action {
         | ChangeRoute(route) => ReasonReact.Update({route: route})
