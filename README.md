@@ -23,7 +23,7 @@ After installation, you will need to add this library to your `bsconfig.json` de
 
 ## Usage
 
-```
+```reason
 type route =
   | Admin
   | Home;
