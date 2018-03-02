@@ -26,20 +26,18 @@ After installation, you will need to add this library to your `bsconfig.json` de
 ```reason
 module RouterConfig = {
   type route =
-  | Admin
-  | Home;
-
-let routeFromUrl = (url: ReasonReact.Router.url) =>
-  switch url.path {
-  | ["admin"] => Admin
-  | [] => Home
-  };
-
-let routeToUrl = (route: t) =>
-  switch route {
-  | Admin => "/admin"
-  | Home => "/"
-  };
+    | Admin
+    | Home;
+  let routeFromUrl = (url: ReasonReact.Router.url) =>
+    switch url.path {
+    | ["admin"] => Admin
+    | [] => Home
+    };
+  let routeToUrl = (route: route) =>
+    switch route {
+    | Admin => "/admin"
+    | Home => "/"
+    };
 };
 
 module Router = ReRoute.CreateRouter(RouterConfig);
@@ -53,8 +51,8 @@ let make = _children => {
       ...(
            (~currentRoute) =>
              switch currentRoute {
-             | Route.Admin => <Admin />
-             | Route.Home => <Home />
+             | RouterConfig.Admin => <Admin />
+             | RouterConfig.Home => <Home />
              }
          )
     </Router.Container>
