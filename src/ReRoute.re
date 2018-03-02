@@ -8,17 +8,15 @@ module CreateRouter = (Config: RouterConfig) => {
   module Container = {
     type action =
       | ChangeRoute(Config.route);
-    type state = {route: Config.route};
+    type state = Config.route;
     let component = ReasonReact.reducerComponent("Router");
     let make = children => {
       ...component,
-      initialState: () => {
-        route:
-          ReasonReact.Router.dangerouslyGetInitialUrl() |> Config.routeFromUrl
-      },
+      initialState: () =>
+        ReasonReact.Router.dangerouslyGetInitialUrl() |> Config.routeFromUrl,
       reducer: (action, _state) =>
         switch action {
-        | ChangeRoute(route) => ReasonReact.Update({route: route})
+        | ChangeRoute(route) => ReasonReact.Update(route)
         },
       subscriptions: self => [
         Sub(
@@ -29,7 +27,7 @@ module CreateRouter = (Config: RouterConfig) => {
           ReasonReact.Router.unwatchUrl
         )
       ],
-      render: self => children(~currentRoute=self.state.route)
+      render: self => children(~currentRoute=self.state)
     };
   };
   module Link = {
