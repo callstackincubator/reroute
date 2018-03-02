@@ -78,7 +78,7 @@ Sections below are under construction.
 
 ## Credits
 
-The concept of `reroute` has been highly influenced by @thangngoc89 and his reference implementation. Thank you for pushing this forward!  
+The concept of `reroute` has been highly influenced by [@thangngoc89](https://github.com/thangngoc89) and his [reference implementation](https://gist.github.com/thangngoc89/c9162c0263df5427fe9a36fc7f94ac94). Thank you for pushing this forward!  
 
 ## License
 
