@@ -1,6 +1,6 @@
 {
   "name": "reason-reroute",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Tiny wrapper around ReasonReact.Router ",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,12 @@
     "prepublish": "npm run build",
     "test": "exit 0"
   },
-  "keywords": ["router", "react", "reason", "reasonml"],
+  "keywords": [
+    "router",
+    "react",
+    "reason",
+    "reasonml"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/callstack/reroute.git"
