@@ -1,5 +1,5 @@
 {
-  "name": "reroute",
+  "name": "reason-reroute",
   "bsc-flags": ["-bs-no-version-header", "-bs-super-errors"],
   "refmt": 3,
   "bs-dependencies": ["reason-react"],
