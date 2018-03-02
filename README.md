@@ -24,7 +24,8 @@ After installation, you will need to add this library to your `bsconfig.json` de
 ## Usage
 
 ```reason
-type route =
+module RouterConfig = {
+  type route =
   | Admin
   | Home;
 
@@ -39,15 +40,9 @@ let routeToUrl = (route: t) =>
   | Admin => "/admin"
   | Home => "/"
   };
+};
 
-module Router =
-  ReRoute.CreateRouter(
-    {
-      type route = route;
-      let routeFromUrl = routeFromUrl;
-      let routeToUrl = routeToUrl;
-    }
-  );
+module Router = ReRoute.CreateRouter(RouterConfig);
 
 let component = ReasonReact.statelessComponent("App");
 
