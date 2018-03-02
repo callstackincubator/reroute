@@ -1,6 +1,6 @@
 {
   "name": "reason-reroute",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Tiny wrapper around ReasonReact.Router ",
   "main": "index.js",
   "scripts": {
