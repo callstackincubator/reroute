@@ -76,6 +76,10 @@ Sections below are under construction.
 
 ## Rationale
 
+## Credits
+
+The concept of `reroute` has been highly influenced by @thangngoc89 and his reference implementation. Thank you for pushing this forward!  
+
 ## License
 
 MIT (c) 2018 Callstack
