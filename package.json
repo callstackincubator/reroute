@@ -1,0 +1,32 @@
+{
+  "name": "reroute",
+  "version": "0.0.1",
+  "description": "Tiny wrapper around ReasonReact.Router ",
+  "main": "index.js",
+  "scripts": {
+    "build": "bsb -make-world",
+    "start": "bsb -make-world -w",
+    "clean": "bsb -clean-world",
+    "test": "exit 0"
+  },
+  "keywords": [
+    "router",
+    "react",
+    "reason",
+    "reasonml"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/callstack/reroute.git"
+  },
+  "author": "Mike Grabowski <grabbou@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/callstack/reroute/issues"
+  },
+  "homepage": "https://github.com/callstack/reroute#readme",
+  "devDependencies": {
+    "bs-platform": "^2.1.0",
+    "reason-react": "^0.3.2"
+  }
+}
