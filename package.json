@@ -7,14 +7,10 @@
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
+    "prepublish": "npm run build",
     "test": "exit 0"
   },
-  "keywords": [
-    "router",
-    "react",
-    "reason",
-    "reasonml"
-  ],
+  "keywords": ["router", "react", "reason", "reasonml"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/callstack/reroute.git"
