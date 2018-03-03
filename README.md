@@ -69,6 +69,8 @@ Sections below are under construction.
 
 ## Rationale
 
+ReasonReact comes with a router ([`ReasonReact.Router`](https://reasonml.github.io/reason-react/docs/en/router.html)) by default. It offers minimal yet powerful API that is suitable for applications at any scale. However, being just an API, it leaves the routing logic up to the developer. This library builds on top of it to provide an elegant interface for working with routes that is ready to use, predictable and consistent across apps you create.  
+
 ## Credits
 
 The concept of `reroute` has been highly influenced by [@thangngoc89](https://github.com/thangngoc89) and his [reference implementation](https://gist.github.com/thangngoc89/c9162c0263df5427fe9a36fc7f94ac94). Thank you for pushing this forward!  
