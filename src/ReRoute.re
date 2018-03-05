@@ -9,7 +9,7 @@ module CreateRouter = (Config: RouterConfig) => {
     type action =
       | ChangeRoute(Config.route);
     type state = Config.route;
-    let component = ReasonReact.reducerComponent("Router");
+    let component = ReasonReact.reducerComponent("CallstackRerouteRouter");
     let make = children => {
       ...component,
       initialState: () =>
@@ -31,7 +31,7 @@ module CreateRouter = (Config: RouterConfig) => {
     };
   };
   module Link = {
-    let component = ReasonReact.statelessComponent("Link");
+    let component = ReasonReact.statelessComponent("CallstackRerouteLink");
     let make = (~route, children) => {
       ...component,
       render: _self => {
