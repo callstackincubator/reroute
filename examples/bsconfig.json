@@ -1,0 +1,10 @@
+{
+  "name": "reason-scripts",
+  "sources": ["src"],
+  "bs-dependencies": ["reason-react", "bs-jest", "reason-reroute"],
+  "reason": {
+    "react-jsx": 2
+  },
+  "bsc-flags": ["-bs-super-errors"],
+  "refmt": 3
+}
