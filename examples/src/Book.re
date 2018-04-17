@@ -11,9 +11,9 @@ let make = _children => {
   ...component,
   render: _self => {
     let urlParam = (pathname |> split("/"));
-    Js.log(urlParam[(Array.length(urlParam) - 1)]);
+    let bookId = urlParam[(Array.length(urlParam) - 1)];
     <div>
-      <h1> (ReasonReact.stringToElement("Book " ++ string_of_int(urlParam[(Array.length(urlParam) - 1)]))) </h1>
+      <h1> (ReasonReact.stringToElement("Book " ++ string_of_int(bookId))) </h1>
     </div>
   }
 };
