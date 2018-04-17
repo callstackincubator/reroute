@@ -1,6 +1,4 @@
-type windowLocationPathname = string;
-
-[@bs.val] external pathname : windowLocationPathname = "window.location.pathname";
+[@bs.val] [@bs.scope ("window", "location")] external pathname : string = "pathname";
 
 [@bs.send.pipe : string]
 external split : string => array('a) = "";
