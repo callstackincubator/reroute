@@ -1,7 +1,8 @@
 module type RouterConfig = {
   type route;
+  type param;
   let routeFromUrl: ReasonReact.Router.url => route;
-  let routeToUrl: route => string;
+  let routeToUrl: (route, param) => string;
 };
 
 module CreateRouter = (Config: RouterConfig) => {
@@ -32,10 +33,10 @@ module CreateRouter = (Config: RouterConfig) => {
   };
   module Link = {
     let component = ReasonReact.statelessComponent("CallstackRerouteLink");
-    let make = (~route, children) => {
+    let make = (~route, ~param, children) => {
       ...component,
       render: _self => {
-        let href = Config.routeToUrl(route);
+        let href = Config.routeToUrl(route, param);
         <a
           href
           onClick=(
