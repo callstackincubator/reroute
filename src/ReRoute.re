@@ -15,7 +15,7 @@ module CreateRouter = (Config: RouterConfig) => {
       initialState: () =>
         ReasonReact.Router.dangerouslyGetInitialUrl() |> Config.routeFromUrl,
       reducer: (action, _state) =>
-        switch action {
+        switch (action) {
         | ChangeRoute(route) => ReasonReact.Update(route)
         },
       subscriptions: self => [
@@ -24,10 +24,10 @@ module CreateRouter = (Config: RouterConfig) => {
             ReasonReact.Router.watchUrl(url =>
               self.send(ChangeRoute(url |> Config.routeFromUrl))
             ),
-          ReasonReact.Router.unwatchUrl
-        )
+          ReasonReact.Router.unwatchUrl,
+        ),
       ],
-      render: self => children(~currentRoute=self.state)
+      render: self => children(~currentRoute=self.state),
     };
   };
   module Link = {
@@ -46,7 +46,7 @@ module CreateRouter = (Config: RouterConfig) => {
           )>
           (ReasonReact.arrayToElement(children))
         </a>;
-      }
+      },
     };
   };
 };
