@@ -36,16 +36,17 @@ module CreateRouter = (Config: RouterConfig) => {
       ...component,
       render: _self => {
         let href = Config.routeToUrl(route);
-        <a
-          href
-          onClick=(
-            event => {
+        ReasonReact.createDomElement(
+          "a",
+          ~props={
+            "href": href,
+            "onClick": event => {
               ReactEventRe.Synthetic.preventDefault(event);
               ReasonReact.Router.push(href);
-            }
-          )>
-          (ReasonReact.arrayToElement(children))
-        </a>;
+            },
+          },
+          children,
+        );
       },
     };
   };
