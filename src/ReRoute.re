@@ -38,7 +38,7 @@ module CreateRouter = (Config: RouterConfig) => {
           href
           onClick=(
             event => {
-              ReactEventRe.Synthetic.preventDefault(event);
+              event->ReactEvent.Synthetic.preventDefault;
               ReasonReact.Router.push(href);
             }
           )>
