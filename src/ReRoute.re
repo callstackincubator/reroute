@@ -1,6 +1,6 @@
 module type RouterConfig = {
   type route;
-  let routeFromUrl: ReasonReact.Router.url => route;
+  let routeFromUrl: ReasonReactRouter.url => route;
   let routeToUrl: route => string;
 };
 
@@ -13,17 +13,17 @@ module CreateRouter = (Config: RouterConfig) => {
     let make = children => {
       ...component,
       initialState: () =>
-        ReasonReact.Router.dangerouslyGetInitialUrl() |> Config.routeFromUrl,
+        ReasonReactRouter.dangerouslyGetInitialUrl() |> Config.routeFromUrl,
       reducer: (action, _state) =>
         switch (action) {
         | ChangeRoute(route) => ReasonReact.Update(route)
         },
       didMount: self => {
         let watcherID =
-          ReasonReact.Router.watchUrl(url =>
+          ReasonReactRouter.watchUrl(url =>
             self.send(ChangeRoute(url |> Config.routeFromUrl))
           );
-        self.onUnmount(() => ReasonReact.Router.unwatchUrl(watcherID));
+        self.onUnmount(() => ReasonReactRouter.unwatchUrl(watcherID));
       },
       render: self => children(~currentRoute=self.state),
     };
@@ -39,7 +39,7 @@ module CreateRouter = (Config: RouterConfig) => {
           onClick=(
             event => {
               event->ReactEvent.Synthetic.preventDefault;
-              ReasonReact.Router.push(href);
+              ReasonReactRouter.push(href);
             }
           )>
           (ReasonReact.array(children))
