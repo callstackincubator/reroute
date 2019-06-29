@@ -4,7 +4,7 @@
   "refmt": 3,
   "bs-dependencies": ["reason-react"],
   "reason": {
-    "react-jsx": 2
+    "react-jsx": 3
   },
   "namespace": false,
   "sources": [
