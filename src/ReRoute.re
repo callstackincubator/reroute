@@ -6,7 +6,7 @@ module type RouterConfig = {
 
 module CreateRouter = (Config: RouterConfig) => {
   let useRouter = () => {
-    let (currentRoute, setCurrentRoute) =
+    let (currentRoute: Config.route, setCurrentRoute) =
       React.useState(() =>
         ReasonReact.Router.dangerouslyGetInitialUrl() |> Config.routeFromUrl
       );
@@ -24,10 +24,6 @@ module CreateRouter = (Config: RouterConfig) => {
   };
 
   module Container = {
-    type action =
-      | ChangeRoute(Config.route);
-    type state = Config.route;
-
     [@react.component]
     let make = (~children) => {
       let currentRoute = useRouter();
