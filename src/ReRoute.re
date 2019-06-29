@@ -1,6 +1,6 @@
 module type RouterConfig = {
   type route;
-  let routeFromUrl: ReasonReactRouter.url => route;
+  let routeFromUrl: ReasonReact.Router.url => route;
   let routeToUrl: route => string;
 };
 
@@ -10,24 +10,28 @@ module CreateRouter = (Config: RouterConfig) => {
       | ChangeRoute(Config.route);
     type state = Config.route;
 
-    [@react.component]
-    let make = (~children) => {
-      let (state, send) =
-        React.useReducer(
-          (_oldState, ChangeRoute(newRoute)) => newRoute,
-          ReasonReact.Router.dangerouslyGetInitialUrl() |> Config.routeFromUrl,
+    let useRouter = () => {
+      let (currentRoute, setCurrentRoute) =
+        React.useState(() =>
+          ReasonReact.Router.dangerouslyGetInitialUrl() |> Config.routeFromUrl
         );
       React.useEffect1(
         () => {
           let watcherID =
             ReasonReact.Router.watchUrl(url =>
-              send(ChangeRoute(url |> Config.routeFromUrl))
+              setCurrentRoute(_old => url |> Config.routeFromUrl)
             );
           Some(() => ReasonReact.Router.unwatchUrl(watcherID));
         },
         [||],
       );
-      children(~currentRoute=state);
+      currentRoute;
+    };
+
+    [@react.component]
+    let make = (~children) => {
+      let currentRoute = useRouter();
+      children(~currentRoute);
     };
 
     module Jsx2 = {
@@ -65,7 +69,12 @@ module CreateRouter = (Config: RouterConfig) => {
           (~route, ~className=?, children: array(ReasonReact.reactElement)) =>
         ReasonReactCompat.wrapReactForReasonReact(
           make,
-          makeProps(~route, ~className?, ~children=React.array(children), ()),
+          makeProps(
+            ~route,
+            ~className?,
+            ~children=React.array(children),
+            (),
+          ),
           React.array(children),
         );
     };
