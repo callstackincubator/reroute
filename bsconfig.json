@@ -1,16 +1,24 @@
 {
   "name": "reason-reroute",
-  "bsc-flags": ["-bs-no-version-header", "-bs-super-errors"],
-  "refmt": 3,
-  "bs-dependencies": ["reason-react"],
+  "bsc-flags": [ "-bs-no-version-header", "-bs-super-errors" ],
+  "bs-dependencies": [ "reason-react" ],
   "reason": {
-    "react-jsx": 2
+    "react-jsx": 3
   },
   "namespace": false,
+  "package-specs": {
+    "module": "es6",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
   "sources": [
     {
       "dir": "src",
       "public": "all"
+    },
+    {
+      "dir": "examples",
+      "type": "dev"
     }
   ]
 }
