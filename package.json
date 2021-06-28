@@ -1,21 +1,22 @@
 {
   "name": "reason-reroute",
   "version": "0.0.4",
-  "description": "Tiny wrapper around ReasonReact.Router ",
+  "description": "Tiny wrapper around ReasonReactRouter ",
   "main": "index.js",
+  "files": [ "src", "bsconfig.json" ],
   "scripts": {
-    "build": "bsb -make-world",
-    "start": "bsb -make-world -w",
-    "clean": "bsb -clean-world",
-    "prepublish": "npm run build",
-    "test": "exit 0"
+    "bundle": "esbuild ./examples/index.bs.js --outfile=www/js/bundle.js --bundle --sourcemap --target=chrome58,firefox57,safari11,edge16 --define:process.env.NODE_ENV='\"development\"'",
+    "bundle:watch": "npm run bundle -- --watch --color=true",
+    "dev-server": "PORT=5000 live-server ./www --host=localhost",
+    "bs:build": "NINJA_ANSI_FORCED=1 bsb -make-world",
+    "bs:watch": "watchexec -w examples --exts re,rei,ml,mli,atd,json -r -c 'npm run bs:build'",
+    "bs:clean": "bsb -clean-world",
+    "start": "npm run clean; concurrently --names re,dev,js --kill-others 'npm run bs:watch' 'npm run dev-server' 'npm run bundle:watch'",
+    "bundle:prod": "npm run bundle --minify --define:process.env.NODE_ENV='\"production\"'",
+    "clean": "rm -rf www/js",
+    "format": "find . -iname '*.re' | grep -v node_modules | xargs bsrefmt --in-place && find . -iname '*.rei' | xargs bsrefmt -i true --in-place"
   },
-  "keywords": [
-    "router",
-    "react",
-    "reason",
-    "reasonml"
-  ],
+  "keywords": [ "router", "react", "reason", "reasonml" ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/callstack/reroute.git"
@@ -27,7 +28,13 @@
   },
   "homepage": "https://github.com/callstack/reroute#readme",
   "devDependencies": {
-    "bs-platform": "^4.0.3",
-    "reason-react": "^0.5.3"
+    "bs-platform": "^9.0.2",
+    "html-webpack-plugin": "^5.3.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "reason-react": "^0.9.1",
+    "concurrently": "^6.0.0",
+    "esbuild": "^0.10.2",
+    "live-server": "^1.2.1"
   }
 }

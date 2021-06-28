@@ -1,6 +1,6 @@
 module type RouterConfig = {
   type route;
-  let routeFromUrl: ReasonReact.Router.url => route;
+  let routeFromUrl: ReasonReactRouter.url => route;
   let routeToUrl: route => string;
 };
 
@@ -9,42 +9,38 @@ module CreateRouter = (Config: RouterConfig) => {
     type action =
       | ChangeRoute(Config.route);
     type state = Config.route;
-    let component = ReasonReact.reducerComponent("CallstackRerouteRouter");
-    let make = children => {
-      ...component,
-      initialState: () =>
-        ReasonReact.Router.dangerouslyGetInitialUrl() |> Config.routeFromUrl,
-      reducer: (action, _state) =>
-        switch (action) {
-        | ChangeRoute(route) => ReasonReact.Update(route)
-        },
-      didMount: self => {
+    [@react.component]
+    let make = (~children) => {
+      let (state, dispatch) =
+        React.useReducer(
+          (_state, action) =>
+            switch (action) {
+            | ChangeRoute(route) => route
+            },
+          ReasonReactRouter.dangerouslyGetInitialUrl() |> Config.routeFromUrl,
+        );
+      React.useEffect0(() => {
         let watcherID =
-          ReasonReact.Router.watchUrl(url =>
-            self.send(ChangeRoute(url |> Config.routeFromUrl))
+          ReasonReactRouter.watchUrl(url =>
+            dispatch(ChangeRoute(url |> Config.routeFromUrl))
           );
-        self.onUnmount(() => ReasonReact.Router.unwatchUrl(watcherID));
-      },
-      render: self => children(~currentRoute=self.state),
+        Some(() => ReasonReactRouter.unwatchUrl(watcherID));
+      });
+      children(~currentRoute=state);
     };
   };
   module Link = {
-    let component = ReasonReact.statelessComponent("CallstackRerouteLink");
-    let make = (~route, children) => {
-      ...component,
-      render: _self => {
-        let href = Config.routeToUrl(route);
-        <a
-          href
-          onClick=(
-            event => {
-              event->ReactEvent.Synthetic.preventDefault;
-              ReasonReact.Router.push(href);
-            }
-          )>
-          (ReasonReact.array(children))
-        </a>;
-      },
+    [@react.component]
+    let make = (~route, ~children) => {
+      let href = Config.routeToUrl(route);
+      <a
+        href
+        onClick={event => {
+          event->ReactEvent.Synthetic.preventDefault;
+          ReasonReactRouter.push(href);
+        }}>
+        children
+      </a>;
     };
   };
 };
